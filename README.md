@@ -1,5 +1,8 @@
 # Starbucks-POS
 
+<h2>dEMO<\h2>
+https://drive.google.com/file/d/18PKasPmV0dh3Tnx1Mp2ajw-x6dF101Lo/view?usp=sharing
+<h2>intro<\h2>
+https://drive.google.com/file/d/1LT5v2byzez9AsgXkMN48j1O6UYl5XAGh/view?usp=sharing
 
-https://github.com/JingHsu1997/Starbucks-POS/assets/134953373/e48dab84-55de-4b5f-89d8-6369666ce777
 
