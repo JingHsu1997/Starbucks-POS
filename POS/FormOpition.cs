@@ -73,11 +73,11 @@ namespace POS
 
         private void txtAmount_TextChanged(object sender, EventArgs e)
         {
-            if(txtAmount.Text != "")
+            if (txtAmount.Text != "")
             {
                 bool isAmountCorrect = Int32.TryParse(txtAmount.Text, out int amount);
 
-                if((isAmountCorrect == false) || (amount == 1))
+                if ((isAmountCorrect == false) || (amount == 1))
                 {
                     txtAmount.Text = amount.ToString();
                 }
@@ -105,7 +105,7 @@ namespace POS
         private void btnSub_Click(object sender, EventArgs e)
         {
 
-            if(amount <= 2)
+            if (amount <= 2)
             {
                 amount--;
                 txtAmount.Text = amount.ToString();
@@ -284,7 +284,7 @@ namespace POS
 
         private void ckBoxLessIce_CheckedChanged(object sender, EventArgs e)
         {
-            if(ckBoxLessIce.Checked)
+            if (ckBoxLessIce.Checked)
             {
                 //opitionText += ckBoxLessIce.Text+"\n";
                 selectIce = ckBoxLessIce.Text;
@@ -422,39 +422,27 @@ namespace POS
 
         private void btnAddToCart_Click(object sender, EventArgs e)
         {
-            //Form1 frm = new Form1();
-            //frm.AddProductToCart(ProductName, amount,UnitPrice, opitionText);
-            //frm.Show();
             bool isSizeSelected = gBoxSelect.Controls.OfType<System.Windows.Forms.CheckBox>().Any(cb => cb.Checked);
             bool isMilkSelected = gBoxMilk.Controls.OfType<System.Windows.Forms.CheckBox>().Any(cb => cb.Checked);
+
             if (isSizeSelected && isMilkSelected)
             {
-                SqlConnection con = new SqlConnection(strDBConnectionstring);
-                con.Open();
+                string optionText = $"{selectSizeHotCold}, {selectIce}, {selectMilk}, {selectExtraE}";
 
-                string strSQL = "insert into dbo.OrderDetail(ProductName,Price,Amount,TotalPrice,Variation,Ice,Milk,Extra) values (@NewProductName,@NewPrice,@NewAmount,@NewTotalPrice,@NewVariation,@NewIce, @NewMilk, @NewExtra);";
-                SqlCommand cmd = new SqlCommand(strSQL, con);
+                FormMenu mainForm = System.Windows.Forms.Application.OpenForms.OfType<FormMenu>().FirstOrDefault();
 
-                cmd.Parameters.AddWithValue("@NewProductName", ProductName);
-                cmd.Parameters.AddWithValue("@NewPrice", UnitPrice);
-                cmd.Parameters.AddWithValue("@NewAmount", amount);
-                cmd.Parameters.AddWithValue("@NewTotalPrice", totalPrice);
-                cmd.Parameters.AddWithValue("@NewVariation", selectSizeHotCold);
-                cmd.Parameters.AddWithValue("@NewIce", selectIce);
-                cmd.Parameters.AddWithValue("@NewMilk", selectMilk);
-                cmd.Parameters.AddWithValue("@NewExtra", selectExtraE);
+                if (mainForm != null)
+                {
+                    mainForm.AddProductToCart(ProductName, amount, totalPrice, optionText);
+                }
 
-
-                cmd.ExecuteNonQuery();
-                con.Close();
-                
+                // 4. 將資料送回主畫面後，關閉這個客製化選項視窗
                 this.Close();
             }
             else
             {
                 MessageBox.Show("Variation and milk are required.");
             }
-            
         }
     }
 }

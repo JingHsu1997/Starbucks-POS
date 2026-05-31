@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +26,9 @@ namespace POS
             {
                 imgno = 1;
             }
-            guna2PictureBox1.ImageLocation = string.Format(""+Application.StartupPath+"\\Image\\sale{0}.png", imgno);
+            string resourceDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources");
+            string imageName = $"sale{imgno}.png";
+            guna2PictureBox1.ImageLocation = Path.Combine(resourceDir, imageName);
             imgno++;
         }
 
@@ -54,7 +57,7 @@ namespace POS
 
         private void btnStaff_Click(object sender, EventArgs e)
         {
-            FormMemberSign frm = new FormMemberSign();
+            FormSignin frm = new FormSignin();
             frm.ShowDialog();
         }
 
