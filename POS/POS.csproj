@@ -64,7 +64,6 @@
     <Compile Include="Component\UserControl2.Designer.cs">
       <DependentUpon>UserControl2.cs</DependentUpon>
     </Compile>
-    <Compile Include="DBConnection.cs" />
     <Compile Include="FormMenu.cs">
       <SubType>Form</SubType>
     </Compile>
